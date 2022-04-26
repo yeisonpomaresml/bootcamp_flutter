@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bootcamp/app_config.dart';
 import 'package:flutter_bootcamp/providers/providers.dart';
 import 'package:provider/provider.dart';
-import 'screens/screens.dart';
 
 void main() => runApp(AppState());
 
@@ -20,12 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
-      routes: {
-        'login': ((context) => const LoginScreen()),
-        'register': ((context) => const RegisterScreen()),
-        'home': ((context) => const HomeScreen()),
-      },
+      initialRoute: AppConfig.initialRoute,
+      routes: AppConfig.routes(),
     );
   }
 }

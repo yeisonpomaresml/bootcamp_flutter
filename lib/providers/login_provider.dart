@@ -7,9 +7,6 @@ import '../models/user.dart';
 
 class LoginProvider extends ChangeNotifier {
   String endpoint = 'https://identitytoolkit.googleapis.com/v1';
-  LoginProvider() {
-    print("iniciando login_provider...");
-  }
 
   Future<User?> loginUsuario(Map<String, String> formData) async {
     var url = Uri.parse(endpoint +

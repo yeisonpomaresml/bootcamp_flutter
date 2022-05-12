@@ -7,9 +7,6 @@ import '../models/user.dart';
 
 class RegisterProvider extends ChangeNotifier {
   String endpoint = 'https://identitytoolkit.googleapis.com/v1/';
-  RegisterProvider() {
-    print("iniciando register_provider...");
-  }
 
   Future<bool> registrarUsuario(Map<String, String> formData) async {
     var url = Uri.parse(endpoint +
@@ -27,7 +24,7 @@ class RegisterProvider extends ChangeNotifier {
       var responseDb = await http.put(urlDb,
           body: jsonEncode(
               {'name': formData['name'], 'lastname': formData['lastname']}));
-      if (response.statusCode == 200) {
+      if (responseDb.statusCode == 200) {
         return true;
       } else {
         return false;

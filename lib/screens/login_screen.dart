@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
@@ -15,10 +16,35 @@ class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': '', 'password': ''};
   LoginProvider loginProvider = LoginProvider();
+  UserProvider userProvider = UserProvider();
+  bool checkSaveData = false;
+  SharedPreferences? pref;
+  //controllers
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    loadSharedPreferences();
+    super.initState();
+  }
+
+  loadSharedPreferences() async {
+    pref = await SharedPreferences.getInstance();
+    if (pref != null) {
+      emailController.text = pref!.getString("email").toString();
+      passwordController.text = pref!.getString("password").toString();
+      formData['email'] = emailController.text;
+      formData['password'] = passwordController.text;
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     loginProvider = Provider.of<LoginProvider>(context);
+    userProvider = Provider.of<UserProvider>(context);
+
     return Scaffold(
         body: Container(
       width: double.infinity,
@@ -49,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       AppFormField(
                         'email',
                         'Correo electronico',
+                        controller: emailController,
                         formData: formData,
                         validator: (value) {
                           if (value!.length < 6) {
@@ -60,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       AppFormField(
                         'password',
                         'Contraseña',
+                        controller: passwordController,
                         obscureText: true,
                         formData: formData,
                         validator: (value) {
@@ -69,6 +97,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
+                      CheckboxListTile(
+                          title: const Text(
+                            'Desea guardar sus datos',
+                            style: TextStyle(color: Colors.blueGrey),
+                          ),
+                          value: checkSaveData,
+                          onChanged: (value) {
+                            checkSaveData = value!;
+                            setState(() {});
+                          }),
                       ElevatedButton(
                           onPressed: formLogin, child: const Text('Ingresar'))
                     ],
@@ -93,8 +131,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   formLogin() async {
     if (formKey.currentState!.validate()) {
-      bool respuesta = await loginProvider.loginUsuario(formData);
-      if (respuesta) {
+      var usuario = await loginProvider.loginUsuario(formData);
+      if (usuario != null) {
+        userProvider.setUser(usuario);
+
+        if (checkSaveData && pref != null) {
+          pref!.setString("email", usuario.email!);
+          pref!.setString("password", formData['password']!);
+        }
+
         AppDialogs.showDialog2(context, 'Usuario Autenticado!', [
           TextButton(
               onPressed: () {

@@ -8,6 +8,8 @@ class AppConfig {
       'login': ((context) => const LoginScreen()),
       'register': ((context) => const RegisterScreen()),
       'home': ((context) => const HomeScreen()),
+      'mapa': ((context) => const MapaScreen()),
+      'acerca': ((context) => const AcercaScreen()),
     };
   }
 }

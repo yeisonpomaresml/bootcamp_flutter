@@ -13,7 +13,12 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   var formKey = GlobalKey<FormState>();
-  Map<String, String> formData = {'email': '', 'password': ''};
+  Map<String, String> formData = {
+    'email': '',
+    'password': '',
+    'name': '',
+    'lastname': ''
+  };
   RegisterProvider registerProvider = RegisterProvider();
 
   @override
@@ -47,6 +52,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       const AppTitle('Registro de Usuario'),
                       const SizedBox(height: 25),
+                      AppFormField(
+                        'name',
+                        'Nombre',
+                        formData: formData,
+                        validator: (value) {
+                          if (value!.length < 4) {
+                            return "Nombre no valido.";
+                          }
+                          return null;
+                        },
+                      ),
+                      AppFormField(
+                        'lastname',
+                        'Apellido',
+                        formData: formData,
+                        validator: (value) {
+                          if (value!.length < 4) {
+                            return "Apellido no valido.";
+                          }
+                          return null;
+                        },
+                      ),
                       AppFormField(
                         'email',
                         'Correo electronico',

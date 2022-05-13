@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/providers.dart';
+
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,9 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String name = userProvider.user.name!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bootcamp App'),
-      ),
+      appBar: getAppBar(context, 'Bootcamp App', userProvider.user),
       drawer: const AppDrawer(),
       body: Center(
         child: Text('Bienvenido ' + name + ' a la aplicacion....'),

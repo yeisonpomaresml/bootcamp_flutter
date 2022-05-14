@@ -66,7 +66,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     if (image != null) {
                       final bytes = File(image!.path).readAsBytesSync();
                       formData['image'] = base64Encode(bytes);
-                      print(formData['image']);
                     }
                     setState(() {});
                   },

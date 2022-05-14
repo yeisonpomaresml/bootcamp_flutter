@@ -21,6 +21,7 @@ class AppDrawer extends StatelessWidget {
             },
             selected: true,
           ),
+          const Divider(),
           ListTile(
             title: const Text('Mapa'),
             onTap: () {

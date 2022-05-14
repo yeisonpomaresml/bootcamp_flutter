@@ -13,6 +13,11 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  setUserLocation(double latitude, double longitude) {
+    user.setLocation(latitude, longitude);
+    notifyListeners();
+  }
+
   Future<bool> updateUsuario(Map<String, String> formData) async {
     var urlDb = Uri.parse(
         'https://fir-notificacion-38f03.firebaseio.com/users/' +

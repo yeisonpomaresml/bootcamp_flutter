@@ -35,6 +35,10 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Permiso para usar el microfono</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<key>UIBackgroundModes</key>
+	<string>location</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

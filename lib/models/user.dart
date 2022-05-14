@@ -27,11 +27,18 @@ class User {
   String? name;
   String? lastname;
   String? image;
+  double? latitude;
+  double? longitude;
 
   setUserData(Map<String, dynamic> json) {
     name = json['name'];
     lastname = json['lastname'];
     image = json['image'];
+  }
+
+  setLocation(double latitude, double longitude) {
+    this.latitude = latitude;
+    this.longitude = longitude;
   }
 
   factory User.fromJson(Map<String, dynamic> json) => User(

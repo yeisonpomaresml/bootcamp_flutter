@@ -12,31 +12,31 @@ class AppDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
               child: Column(
-            children: [Icon(Icons.person, size: 100)],
+            children: const [Icon(Icons.person, size: 100)],
           )),
           ListTile(
-            title: Text('Home'),
+            title: const Text('Home'),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'home');
             },
             selected: true,
           ),
           ListTile(
-            title: Text('Mapa'),
+            title: const Text('Mapa'),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'mapa');
             },
           ),
           ListTile(
-            title: Text('Temporal 1'),
+            title: const Text('Temporal 1'),
             onTap: () {},
           ),
           ListTile(
-            title: Text('Temporal 2'),
+            title: const Text('Temporal 2'),
             onTap: () {},
           ),
           ListTile(
-            title: Text('Acerca'),
+            title: const Text('Acerca'),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'acerca');
             },

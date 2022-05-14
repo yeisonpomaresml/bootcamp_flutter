@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/providers.dart';
 import '../widgets/widgets.dart';
 
 class AcercaScreen extends StatefulWidget {
@@ -9,14 +11,14 @@ class AcercaScreen extends StatefulWidget {
 }
 
 class _AcercaScreenState extends State<AcercaScreen> {
+  UserProvider userProvider = UserProvider();
   @override
   Widget build(BuildContext context) {
+    userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Acerca'),
-      ),
+      appBar: getAppBar(context, 'Acerca', userProvider.user),
       drawer: const AppDrawer(),
-      body: Center(
+      body: const Center(
         child: Text('App V.1.0'),
       ),
     );
